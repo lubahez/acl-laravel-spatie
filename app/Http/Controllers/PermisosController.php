@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Spatie\Permission\Models\Role;
 
-class RolesController extends Controller
+class PermisosController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -16,7 +16,7 @@ class RolesController extends Controller
     {
         $roles = Role::all();
 
-        return view('roles.index', compact('roles'));
+        return view('permisos.index', compact('roles'));
     }
 
     /**
@@ -26,7 +26,7 @@ class RolesController extends Controller
      */
     public function create()
     {
-        return view('roles.create');
+        return view('permisos.create');
     }
 
     /**
@@ -44,7 +44,7 @@ class RolesController extends Controller
         $role = Role::create(['name' => $request->input('nombre')]);
 
         if($role){
-            return redirect()->route('roles.index')->with(['alert' => true,   'type' => 'success', 'message' => 'Rol Creado Correctamente.']);
+            return redirect()->route('permisos.index')->with(['alert' => true,   'type' => 'success', 'message' => 'Rol Creado Correctamente.']);
 
         } else {
             return redirect()->back()->with(['alert' => true,   'type' => 'danger', 'message' => 'Error al guardar, intente de nuevo.']);
@@ -72,7 +72,7 @@ class RolesController extends Controller
     {
         $rol = Role::find($id);
 
-        return view('roles.edit', compact('rol'));
+        return view('permisos.edit', compact('rol'));
     }
 
     /**
@@ -92,7 +92,7 @@ class RolesController extends Controller
         $rol->name = $request->input('nombre');
 
         if($rol->save()){
-            return redirect()->route('roles.index')->with(['alert' => true, 'type' => 'success', 'message' => 'Rol Modificado Correctamente.']);
+            return redirect()->route('permisos.index')->with(['alert' => true, 'type' => 'success', 'message' => 'Rol Modificado Correctamente.']);
 
         } else {
             return redirect()->back()->with(['alert' => true, 'type' => 'danger', 'message' => 'Error al modificar, intente de nuevo.']);

@@ -72,7 +72,39 @@
         </nav>
 
         <main class="py-4">
-            @yield('content')
+            <div class="container-fluid">
+                <div class="row justify-content-center">
+                    @guest
+                        <div class="col-md-9">
+                            @yield('content')
+                        </div>
+                    @else
+                    <div class="col-md-3">
+                        <div class="card">
+                            <div class="card-header">
+                                <h4><span class="fa fa-add" aria-hidden="true"></span> Acceso:</h4>
+                            </div>
+                            <ul>
+                                <li><a href="{{ route('permisos.index') }}">Permisos</a></li>
+                                <li><a href="{{ route('roles.index') }}">Roles</a></li>
+                                <li><a href="{{ route('usuarios.index') }}">Usuarios</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="col-md-9">
+                        @if(session()->has('alert')) 
+                            <div class="alert alert-{{ session('type') }} alert-dismissible fade show" role="alert">
+                              {{ session('message') }}
+                              <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                  <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                        @endif
+                        @yield('content')
+                    </div>
+                    @endif
+                </div>
+            </div>
         </main>
     </div>
 </body>

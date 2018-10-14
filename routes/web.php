@@ -18,3 +18,11 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
+
+Route::prefix('panel')->group(function (){
+
+	Route::resource('usuarios', 'UsersController');
+	Route::resource('roles', 'RolesController');
+	Route::resource('permisos', 'PermisosController');
+
+});

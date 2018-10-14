@@ -5,7 +5,7 @@
 	<div class="card-header"><h3>Listado de usuarios</h3></div>
 	<div class="card-body">
 		<div class="text-right">
-			<a href="{{ route('sucursales.create') }}" class="btn btn-success">Crear Usuario</a>
+			<a href="{{ route('usuarios.create') }}" class="btn btn-success">Crear Usuario</a>
 		</div>
 	</div>
 	<div class="card-body">
