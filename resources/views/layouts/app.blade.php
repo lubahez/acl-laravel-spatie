@@ -80,16 +80,24 @@
                         </div>
                     @else
                     <div class="col-md-3">
+                        @role('admin')
                         <div class="card">
                             <div class="card-header">
                                 <h4><span class="fa fa-add" aria-hidden="true"></span> Acceso:</h4>
                             </div>
                             <ul>
+                            @can('read_permissions')
                                 <li><a href="{{ route('permisos.index') }}">Permisos</a></li>
+                            @endcan
+                            @can('read_roles')
                                 <li><a href="{{ route('roles.index') }}">Roles</a></li>
+                            @endcan
+                            @can('read_users')
                                 <li><a href="{{ route('usuarios.index') }}">Usuarios</a></li>
+                            @endcan
                             </ul>
                         </div>
+                        @endrole
                     </div>
                     <div class="col-md-9">
                         @if(session()->has('alert')) 

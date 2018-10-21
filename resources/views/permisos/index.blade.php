@@ -2,10 +2,10 @@
 
 @section('content')
 <div class="card">
-	<div class="card-header"><h3>Listado de Roles</h3></div>
+	<div class="card-header"><h3>Listado de Permisos</h3></div>
 	<div class="card-body">
 		<div class="text-right">
-			<a href="{{ route('roles.create') }}" class="btn btn-success">Crear Rol</a>
+			<a href="{{ route('permisos.create') }}" class="btn btn-success">Crear Permiso</a>
 		</div>
 	</div>
 	<div class="card-body">
@@ -18,19 +18,19 @@
 	    </tr>
 	  </thead>
 	  <tbody>
-	  	@if(count($roles) > 0)
-		  	@foreach($roles as $index => $rol)
+	  	@if(count($permisos) > 0)
+		  	@foreach($permisos as $index => $permiso)
 		    <tr>
 		      <th scope="row">{{ $index + 1}}</th>
-		      <td>{{ $rol->name }}</td>
+		      <td>{{ $permiso->name }}</td>
 		      <td>
-		      	<a href="{{ route('roles.edit', $rol->id) }}" class="btn btn-warning">Editar</a>
+		      	<a href="{{ route('permisos.edit', $permiso->id) }}" class="btn btn-warning">Editar</a>
 		      </td>
 		    </tr>
 		    @endforeach
 		@else
 			<tr>
-			  <th scope="row" colspan="4">No hay roles creados.</th>
+			  <th scope="row" colspan="4">No hay permisos creados.</th>
 			</tr>
 		@endif
 	  </tbody>

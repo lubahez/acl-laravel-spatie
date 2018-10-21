@@ -28,7 +28,7 @@ class UsersController extends Controller
      */
     public function create()
     {
-        //
+        return view('usuarios.create');
     }
 
     /**
@@ -39,7 +39,20 @@ class UsersController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'name' => 'required|string|max:255',
+            'email' => 'required|string|email|max:255|unique:users',
+            'password' => 'required|string|min:6',
+        ]);
+
+        User::create([
+            'name' => $request->input('name'),
+            'email' => $request->input('email'),
+            'password' => bcrypt($request->input('password')),
+        ]);
+
+        return redirect()->route('usuarios.index')->with(['alert' => true,   'type' => 'success', 'message' => 'Usuario registrado correctamente.']);
+
     }
 
     /**

@@ -15,6 +15,7 @@
 	      <th scope="col">#</th>
 	      <th scope="col">Nombre</th>
 	      <th scope="col">Email</th>
+	      <th scope="col">Acceso</th>
 	      <th scope="col">Acciones</th>
 	    </tr>
 	  </thead>
@@ -25,6 +26,10 @@
 		      <th scope="row">{{ $index + 1}}</th>
 		      <td>{{ $usuario->name }}</td>
 		      <td>{{ $usuario->email }}</td>
+		      <td>
+		      	<a href="{{ url('panel/usuarios/'.$usuario->id.'/roles') }}" class="btn btn-success">Permisos</a>
+		      	<a href="{{ url('panel/usuarios/'.$usuario->id.'/roles') }}" class="btn btn-success">Roles</a>
+		      </td>
 		      <td>
 		      	<a href="{{ route('usuarios.edit', $usuario->id) }}" class="btn btn-warning">Editar</a>
 		      </td>

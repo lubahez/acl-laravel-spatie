@@ -9,7 +9,7 @@
 		</div>
 	</div>
 	<div class="card-body">
-		<table class="table table-bordered">
+		<table class="table table-bordered table-hover">
 	  <thead>
 	    <tr>
 	      <th scope="col">#</th>
@@ -24,6 +24,7 @@
 		      <th scope="row">{{ $index + 1}}</th>
 		      <td>{{ $rol->name }}</td>
 		      <td>
+		      	<a href="{{ url('panel/roles/'.$rol->id.'/permisos') }}" class="btn btn-warning">Permisos</a>
 		      	<a href="{{ route('roles.edit', $rol->id) }}" class="btn btn-warning">Editar</a>
 		      </td>
 		    </tr>

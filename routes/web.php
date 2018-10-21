@@ -21,7 +21,11 @@ Route::get('/home', 'HomeController@index')->name('home');
 
 Route::prefix('panel')->group(function (){
 
+	Route::get('usuarios/{id}/roles', 'AclController@usuarios_roles');
+	Route::put('usuarios/asignar/{id}', 'AclController@asignar_usuarios_roles');
 	Route::resource('usuarios', 'UsersController');
+	Route::get('roles/{id}/permisos', 'RolPermisosController@show');
+	Route::put('roles/asignar/{id}', 'RolPermisosController@asignar');
 	Route::resource('roles', 'RolesController');
 	Route::resource('permisos', 'PermisosController');
 

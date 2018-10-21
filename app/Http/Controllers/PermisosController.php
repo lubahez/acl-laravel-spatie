@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use Spatie\Permission\Models\Role;
+use Spatie\Permission\Models\Permission;
 
 class PermisosController extends Controller
 {
@@ -14,9 +14,9 @@ class PermisosController extends Controller
      */
     public function index()
     {
-        $roles = Role::all();
+        $permisos = Permission::all();
 
-        return view('permisos.index', compact('roles'));
+        return view('permisos.index', compact('permisos'));
     }
 
     /**
@@ -41,10 +41,10 @@ class PermisosController extends Controller
             'nombre' => 'required',
         ]);
 
-        $role = Role::create(['name' => $request->input('nombre')]);
+        $permission = Permission::create(['name' => $request->input('nombre')]);
 
-        if($role){
-            return redirect()->route('permisos.index')->with(['alert' => true,   'type' => 'success', 'message' => 'Rol Creado Correctamente.']);
+        if($permission){
+            return redirect()->route('permisos.index')->with(['alert' => true,   'type' => 'success', 'message' => 'Permiso Creado Correctamente.']);
 
         } else {
             return redirect()->back()->with(['alert' => true,   'type' => 'danger', 'message' => 'Error al guardar, intente de nuevo.']);
@@ -70,9 +70,9 @@ class PermisosController extends Controller
      */
     public function edit($id)
     {
-        $rol = Role::find($id);
+        $permission = Permission::find($id);
 
-        return view('permisos.edit', compact('rol'));
+        return view('permisos.edit', compact('permission'));
     }
 
     /**
@@ -88,11 +88,11 @@ class PermisosController extends Controller
             'nombre' => 'required',
         ]);
 
-        $rol = Role::find($id);
-        $rol->name = $request->input('nombre');
+        $permission = Permission::find($id);
+        $permission->name = $request->input('nombre');
 
-        if($rol->save()){
-            return redirect()->route('permisos.index')->with(['alert' => true, 'type' => 'success', 'message' => 'Rol Modificado Correctamente.']);
+        if($permission->save()){
+            return redirect()->route('permisos.index')->with(['alert' => true, 'type' => 'success', 'message' => 'Permiso Modificado Correctamente.']);
 
         } else {
             return redirect()->back()->with(['alert' => true, 'type' => 'danger', 'message' => 'Error al modificar, intente de nuevo.']);

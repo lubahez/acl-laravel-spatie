@@ -13,12 +13,12 @@
 		        </ul>
 		    </div>
 		@endif
-		<form action="{{ route('roles.update', $rol->id) }}" method="post">
+		<form action="{{ route('permisos.update', $permission->id) }}" method="post">
 			@csrf
 			@method('PUT')
 		  <div class="form-group">
 		    <label for="exampleInputEmail1">Nombre:</label>
-		    <input type="text" name="nombre" class="form-control" id="exampleInputEmail1" value="{{ $rol->name }}" placeholder="Escriba nombre">
+		    <input type="text" name="nombre" class="form-control" id="exampleInputEmail1" value="{{ $permission->name }}" placeholder="Escriba nombre">
 		  </div>
 		  <div class="text-right">
 		  	<button type="submit" class="btn btn-success">Guardar</button>
