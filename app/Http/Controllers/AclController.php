@@ -27,7 +27,7 @@ class AclController extends Controller
     	$usuario = User::find($id);
     	$roles = $request->input('roles');
 
-    	$usuario->assignRole($roles);
+    	$usuario->syncRoles($roles);
 
     	return redirect()->route('usuarios.index')->with(['alert' => true,   'type' => 'success', 'message' => 'Roles de usuario modificados correctamente.']);
 
