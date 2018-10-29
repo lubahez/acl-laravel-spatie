@@ -3,11 +3,13 @@
 @section('content')
 <div class="card">
 	<div class="card-header"><h3>Listado de usuarios</h3></div>
+	@can('create_users')
 	<div class="card-body">
 		<div class="text-right">
 			<a href="{{ route('usuarios.create') }}" class="btn btn-success">Crear Usuario</a>
 		</div>
 	</div>
+	@endcan
 	<div class="card-body">
 		<table class="table table-bordered">
 	  <thead>
@@ -27,8 +29,12 @@
 		      <td>{{ $usuario->name }}</td>
 		      <td>{{ $usuario->email }}</td>
 		      <td>
-		      	<a href="{{ url('panel/usuarios/'.$usuario->id.'/roles') }}" class="btn btn-success">Permisos</a>
-		      	<a href="{{ url('panel/usuarios/'.$usuario->id.'/roles') }}" class="btn btn-success">Roles</a>
+		      	@can('assign_permissions_to_user')
+		      		<a href="{{ url('panel/usuarios/'.$usuario->id.'/permisos') }}" class="btn btn-success">Permisos</a>
+		      	@endcan
+		      	@can('assign_roles_to_user')
+		      		<a href="{{ url('panel/usuarios/'.$usuario->id.'/roles') }}" class="btn btn-success">Roles</a>
+		      	@endcan
 		      </td>
 		      <td>
 		      	<a href="{{ route('usuarios.edit', $usuario->id) }}" class="btn btn-warning">Editar</a>

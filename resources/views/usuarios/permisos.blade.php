@@ -2,12 +2,12 @@
 
 @section('content')
 <div class="card">
-    <div class="card-header"><h3>Asignación de permisos del Rol: {{ $role->name }}</h3></div>
+    <div class="card-header"><h3>Asignación de permisos directos al usuario: {{ $usuario->name }}</h3></div>
     <div class="card-body">
       <p>* Marca para conceder, desmarca para revocar</p>
     </div>
     <div class="card-body">
-      <form action="{{ url('panel/roles/asignar/'.$role->id) }}" method="post">
+      <form action="{{ url('panel/usuarios/asignarpermisos/'.$usuario->id) }}" method="post">
         @csrf
         @method('PUT')
         <table class="table table-bordered table-hover">
@@ -22,8 +22,8 @@
           @if(count($permisos) > 0)
             @foreach($permisos as $index => $permiso)
               @php $concedido = false; @endphp
-              @foreach($rolpermisos as $rpermiso)
-                @if($permiso->id == $rpermiso->id)
+              @foreach($usuariopermisos as $upermiso)
+                @if($permiso->id == $upermiso->id)
                   @php $concedido = true; @endphp
                 @endif                    
               @endforeach
@@ -41,7 +41,7 @@
               @endforeach
           @else
               <tr>
-                <th scope="row" colspan="4">No hay roles creados.</th>
+                <th scope="row" colspan="4">No hay permisos creados.</th>
               </tr>
           @endif
         </tbody>

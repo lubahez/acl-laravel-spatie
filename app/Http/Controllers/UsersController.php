@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use App\User;
 
 class UsersController extends Controller
@@ -14,9 +15,8 @@ class UsersController extends Controller
      */
     public function index()
     {
-        $usuarios = User::all();
-        //$usuarios = User::find(1);
-        //dd($usuarios->permissions);
+        // Recuperamos usuarios que no sea el administrador ni el usuario logueado
+        $usuarios = User::wherenotin('id',[1, Auth::id()])->get();
 
         return view('usuarios.index', compact('usuarios'));
     }
@@ -40,7 +40,7 @@ class UsersController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'name' => 'required|string|max:255',
+            'name' => 'required|string',
             'email' => 'required|string|email|max:255|unique:users',
             'password' => 'required|string|min:6',
         ]);
@@ -74,7 +74,9 @@ class UsersController extends Controller
      */
     public function edit($id)
     {
-        //
+        $usuario = User::find($id);
+
+        return view('usuarios.edit', compact('usuario'));
     }
 
     /**
@@ -86,7 +88,19 @@ class UsersController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $request->validate([
+            'name' => 'required|string|max:255',
+            'email' => 'required|string|email|max:255|unique:users',
+        ]);
+
+        $usuario = User::find($id);
+
+        $usuario->name = $request->input('name');
+        $usuario->email = $request->input('email');
+
+        $usuario->save();
+
+        return redirect()->route('usuarios.index')->with(['alert' => true,   'type' => 'success', 'message' => 'Usuario modificado correctamente.']);
     }
 
     /**

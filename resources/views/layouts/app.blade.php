@@ -80,7 +80,7 @@
                         </div>
                     @else
                     <div class="col-md-3">
-                        @role('admin')
+                        @if(Auth::user()->hasAnyPermission(['read_permissions','read_roles','read_users']))
                         <div class="card">
                             <div class="card-header">
                                 <h4><span class="fa fa-add" aria-hidden="true"></span> Acceso:</h4>
@@ -97,7 +97,7 @@
                             @endcan
                             </ul>
                         </div>
-                        @endrole
+                        @endif
                     </div>
                     <div class="col-md-9">
                         @if(session()->has('alert')) 

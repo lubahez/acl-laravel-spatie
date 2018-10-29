@@ -3,11 +3,12 @@
 @section('content')
 <div class="card">
 	<div class="card-header"><h3>Listado de Roles</h3></div>
-	<div class="card-body">
+	@can('create_roles')<div class="card-body">
 		<div class="text-right">
 			<a href="{{ route('roles.create') }}" class="btn btn-success">Crear Rol</a>
 		</div>
 	</div>
+	@endcan
 	<div class="card-body">
 		<table class="table table-bordered table-hover">
 	  <thead>
@@ -24,8 +25,12 @@
 		      <th scope="row">{{ $index + 1}}</th>
 		      <td>{{ $rol->name }}</td>
 		      <td>
-		      	<a href="{{ url('panel/roles/'.$rol->id.'/permisos') }}" class="btn btn-warning">Permisos</a>
-		      	<a href="{{ route('roles.edit', $rol->id) }}" class="btn btn-warning">Editar</a>
+		      	@can('assign_permissions_to_role')
+		      		<a href="{{ url('panel/roles/'.$rol->id.'/permisos') }}" class="btn btn-warning">Permisos</a>
+		      	@endcan
+		      	@can('update_roles')
+		      		<a href="{{ route('roles.edit', $rol->id) }}" class="btn btn-warning">Editar</a>
+		      	@endcan
 		      </td>
 		    </tr>
 		    @endforeach

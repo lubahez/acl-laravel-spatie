@@ -7,7 +7,7 @@
       <p>* Marca para asignar, desmarca para eliminar</p>
     </div>
     <div class="card-body">
-      <form action="{{ url('panel/usuarios/asignar/'.$usuario->id) }}" method="post">
+      <form action="{{ url('panel/usuarios/asignarroles/'.$usuario->id) }}" method="post">
         @csrf
         @method('PUT')
         <table class="table table-bordered table-hover">
